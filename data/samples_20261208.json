@@ -1,0 +1,255 @@
+{
+  "subsamples": [
+    {
+      "id": "A1",
+      "lot": "B51",
+      "parent": null,
+      "units": 6,
+      "form": "plaque",
+      "supplier": "Vendor-A"
+    },
+    {
+      "id": "A2",
+      "lot": "B51",
+      "parent": "A1",
+      "units": 2,
+      "form": "plaque",
+      "supplier": "Vendor-A"
+    },
+    {
+      "id": "A3",
+      "lot": "B51",
+      "parent": "A1",
+      "units": 2,
+      "form": "plaque",
+      "supplier": "Vendor-A"
+    },
+    {
+      "id": "A4",
+      "lot": "B51",
+      "parent": "A1",
+      "units": 2,
+      "form": "plaque",
+      "supplier": "Vendor-A"
+    },
+    {
+      "id": "B2",
+      "lot": "B52",
+      "parent": null,
+      "units": 4,
+      "form": "pellet",
+      "supplier": "Vendor-B"
+    }
+  ],
+  "orders": [
+    {
+      "id": "O11",
+      "customer": "Buyer-1",
+      "lot": "B51",
+      "allowed_samples": [
+        "A2",
+        "A3"
+      ],
+      "methods": [
+        "bend",
+        "scan"
+      ],
+      "retained_units": 1,
+      "needed_by": "17:00"
+    },
+    {
+      "id": "O12",
+      "customer": "Buyer-2",
+      "lot": "B51",
+      "allowed_samples": [
+        "A3",
+        "A4"
+      ],
+      "methods": [
+        "bend"
+      ],
+      "retained_units": 1,
+      "needed_by": "18:00"
+    },
+    {
+      "id": "O13",
+      "customer": "Buyer-3",
+      "lot": "B52",
+      "allowed_samples": [
+        "B2"
+      ],
+      "methods": [
+        "scan"
+      ],
+      "retained_units": 0,
+      "needed_by": "16:00"
+    }
+  ],
+  "methods": [
+    {
+      "id": "bend",
+      "consumes": true,
+      "units_per_attempt": 1
+    },
+    {
+      "id": "scan",
+      "consumes": false,
+      "units_per_attempt": 1
+    }
+  ],
+  "instruments": [
+    {
+      "id": "I1",
+      "method": "bend",
+      "qualification": "C1",
+      "begin": "08:00",
+      "end": "14:00"
+    },
+    {
+      "id": "I2",
+      "method": "bend",
+      "qualification": "C2",
+      "begin": "08:00",
+      "end": "18:00"
+    },
+    {
+      "id": "I3",
+      "method": "scan",
+      "qualification": "C3",
+      "begin": "07:00",
+      "end": "18:00"
+    }
+  ],
+  "attempts": [
+    {
+      "id": "T1",
+      "order": "O11",
+      "instrument": "I1",
+      "method": "bend",
+      "sample": "A2",
+      "start": "09:20",
+      "evidence_at": "09:30",
+      "received": "09:38",
+      "used": 1
+    },
+    {
+      "id": "T2",
+      "order": "O11",
+      "instrument": "I3",
+      "method": "scan",
+      "sample": "A2",
+      "start": "09:00",
+      "evidence_at": "09:15",
+      "received": "09:22",
+      "used": 0
+    },
+    {
+      "id": "T3",
+      "order": "O12",
+      "instrument": "I2",
+      "method": "bend",
+      "sample": "A4",
+      "start": "10:00",
+      "evidence_at": "10:10",
+      "received": "16:50",
+      "used": 1
+    },
+    {
+      "id": "T4",
+      "order": "O11",
+      "instrument": "I2",
+      "method": "bend",
+      "sample": "A3",
+      "start": "15:40",
+      "evidence_at": "15:46",
+      "received": "15:49",
+      "used": 1
+    },
+    {
+      "id": "T5",
+      "order": "O13",
+      "instrument": "I3",
+      "method": "scan",
+      "sample": "B2",
+      "start": "10:30",
+      "evidence_at": "10:45",
+      "received": "10:50",
+      "used": 0
+    }
+  ],
+  "calibrations": [
+    {
+      "id": "K1",
+      "instrument": "I1",
+      "invalid_from": "09:25",
+      "invalid_to": "10:15",
+      "recorded": "14:00",
+      "affects": [
+        "bend"
+      ]
+    },
+    {
+      "id": "K2",
+      "instrument": "I3",
+      "invalid_from": "10:00",
+      "invalid_to": "10:30",
+      "recorded": "14:15",
+      "affects": [
+        "scan"
+      ]
+    }
+  ],
+  "reports": [
+    {
+      "id": "R1",
+      "order": "O11",
+      "issued": "11:00",
+      "attempts": [
+        "T1",
+        "T2"
+      ]
+    },
+    {
+      "id": "R2",
+      "order": "O13",
+      "issued": "12:00",
+      "attempts": [
+        "T5"
+      ]
+    }
+  ],
+  "custody": [
+    {
+      "id": "Q1",
+      "attempt": "T1",
+      "sample": "A2",
+      "handed": "09:20",
+      "received_from_instrument": "09:33",
+      "reported": "09:39"
+    },
+    {
+      "id": "Q2",
+      "attempt": "T2",
+      "sample": "A2",
+      "handed": "09:00",
+      "received_from_instrument": "09:17",
+      "reported": "09:22"
+    },
+    {
+      "id": "Q3",
+      "attempt": "T3",
+      "sample": "A4",
+      "handed": "10:00",
+      "received_from_instrument": null,
+      "reported": "10:12"
+    },
+    {
+      "id": "Q4",
+      "attempt": "T4",
+      "sample": "A3",
+      "handed": "15:40",
+      "received_from_instrument": "15:47",
+      "reported": "15:52"
+    }
+  ]
+}
