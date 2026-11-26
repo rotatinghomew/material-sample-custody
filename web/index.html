@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>共用实验室 · 送检与复测看板</title>
+<style>
+  :root { --bd:#d8dee9; --mut:#667085; --ok:#1a7f37; --warn:#b26a00; --bad:#c0392b; --info:#1f6feb; }
+  * { box-sizing: border-box; }
+  body { font: 14px/1.55 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; margin:0; background:#f6f8fa; color:#1f2328; }
+  header { background:#0f2740; color:#fff; padding:18px 28px; }
+  header h1 { margin:0 0 4px; font-size:19px; }
+  header .sub { color:#b9c6d6; font-size:13px; }
+  main { max-width:1180px; margin:22px auto; padding:0 20px 60px; }
+  section { background:#fff; border:1px solid var(--bd); border-radius:10px; padding:16px 18px; margin:16px 0; }
+  h2 { font-size:15px; margin:0 0 12px; }
+  table { border-collapse:collapse; width:100%; font-size:13px; }
+  th,td { border-bottom:1px solid #eef1f4; padding:7px 9px; text-align:left; vertical-align:top; }
+  th { background:#fafbfc; color:#475467; font-weight:600; }
+  .pill { display:inline-block; padding:2px 9px; border-radius:999px; font-size:12px; font-weight:600; }
+  .schedulable { background:#e6f4ea; color:var(--ok); }
+  .need_supplement { background:#fdecea; color:var(--bad); }
+  .awaiting_instrument { background:#fff4e0; color:var(--warn); }
+  .valid { background:#e8f1fe; color:var(--info); }
+  .retest_done_pending_report,.ready_to_issue_report { background:#f0ebff; color:#5b3fc4; }
+  .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .card { border:1px solid var(--bd); border-radius:10px; padding:12px; }
+  .card h3 { margin:0 0 8px; font-size:13px; color:#475467; }
+  .big { font-size:22px; font-weight:700; }
+  code { background:#f2f4f7; padding:1px 5px; border-radius:5px; }
+  select,button { font:inherit; padding:5px 10px; border:1px solid var(--bd); border-radius:7px; background:#fff; }
+  button { cursor:pointer; }
+  .muted { color:var(--mut); font-size:12px; }
+  ul { margin:6px 0 0; padding-left:18px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>共用实验室 · 样品接收与复测承诺</h1>
+  <div class="sub">演练日 2026-12-08（UTC+08:00）· 数据 <code style="background:#1d3a5c;color:#cfe3ff">samples_20261208.json</code> · 所有计算均在本地标准库完成</div>
+</header>
+<main>
+  <section>
+    <h2>送检方状态看板
+      <select id="at" style="margin-left:12px">
+        <option value="">合并快照（日终）</option>
+        <option value="11:05">11:05（R1 刚签发）</option>
+        <option value="14:20" selected>14:20（两条校准更正已到）</option>
+        <option value="16:00">16:00（T4 重测完成）</option>
+        <option value="17:10">17:10（T3 仪器上送已到）</option>
+      </select>
+      <button id="refresh">刷新</button>
+    </h2>
+    <div id="board" class="grid"><div class="muted">加载中…</div></div>
+  </section>
+
+  <section>
+    <h2>校准更正 → 真正受影响的委托</h2>
+    <table id="cal"><thead><tr><th>校准</th><th>仪器</th><th>失效区间 [from,to)</th><th>方法</th><th>命中试验</th><th>委托</th><th>报告</th></tr></thead><tbody></tbody></table>
+    <p class="muted">判定使用读数实际取得时刻 <code>evidence_at</code>，区间左闭右开，并精确限定仪器与方法。K2 因 T5 读数在 10:45（且 start=10:30 恰为右端点）而不命中任何试验。</p>
+  </section>
+
+  <section>
+    <h2>子样数量分层</h2>
+    <table id="qty"><thead><tr><th>子样</th><th>批次</th><th>父样</th><th>登记</th><th>已分出</th><th>本级基数</th><th>已耗用</th><th>未确认风险</th><th>仪器内未交回</th><th>承诺占用</th><th>账面可用</th><th>可排</th></tr></thead><tbody></tbody></table>
+    <p class="muted">父子不重复计库存；交回时刻为 <code>null</code> 不恢复库存；已证实 <code>used=份数=需求</code> 的未结交接不重复扣减同一份实物。</p>
+  </section>
+
+  <section>
+    <h2>报告当前业务效力与复测进度（日终合并视图）</h2>
+    <div id="reports"></div>
+  </section>
+</main>
+<script>
+const LABEL = {
+  schedulable:"可以安排", need_supplement:"缺合格留样 · 需补件",
+  awaiting_instrument:"在等仪器回报", valid:"当前有效",
+  retest_done_pending_report:"复测完成 · 待换发报告",
+  ready_to_issue_report:"回执已齐 · 待签发报告", other:"其他"
+};
+async function getJSON(u){ const r = await fetch(u); if(!r.ok) throw new Error(u); return r.json(); }
+function pill(s){ return `<span class="pill ${s}">${LABEL[s]||s}</span>`; }
+async function loadBoard(){
+  const at = document.getElementById('at').value;
+  const b = await getJSON('/api/board' + (at?`?at=${at}`:''));
+  const cols = [
+    ['schedulable','可以安排'],['need_supplement','缺合格留样需补件'],
+    ['awaiting_instrument','在等仪器回报'],
+    ['retest_done_pending_report','复测完成待换发'],
+    ['ready_to_issue_report','待签发报告'],['valid','有效']
+  ];
+  document.getElementById('board').innerHTML = cols.map(([k,t])=>{
+    const rows = b[k]||[];
+    return `<div class="card"><h3>${t}（${rows.length}）</h3>` +
+      rows.map(o=>`<div style="margin:6px 0"><b>${o.order}</b> ${pill(o.sender_state)}
+        <div class="muted">客户 ${o.customer||'-'} · 需要时刻 ${o.needed_by||'-'}</div></div>`).join('')
+      + `</div>`;
+  }).join('');
+}
+async function loadCal(){
+  const rows = await getJSON('/api/impacts');
+  document.querySelector('#cal tbody').innerHTML = rows.map(x=>`<tr>
+    <td><code>${x.calibration}</code></td><td>${x.instrument}</td>
+    <td>[${x.window[0]}, ${x.window[1]})</td><td>${x.methods.join(',')}</td>
+    <td>${x.affected_attempts.join(', ')||'—'}</td>
+    <td>${x.affected_orders.join(', ')||'—'}</td>
+    <td>${x.affected_reports.join(', ')||'—'}</td></tr>`).join('');
+}
+async function loadQty(){
+  const q = await getJSON('/api/quantities');
+  document.querySelector('#qty tbody').innerHTML = Object.values(q).map(v=>`<tr>
+    <td><code>${v.id}</code></td><td>${v.lot||''}</td><td>${v.parent||'—'}</td>
+    <td>${v.received}</td><td>${v.child_units}</td><td>${v.base_units}</td>
+    <td>${v.consumed}</td><td>${v.unconfirmed}</td><td>${v.in_instrument}</td>
+    <td>${v.reserved}</td><td><b>${v.book_available}</b></td>
+    <td><b style="color:${v.schedulable<0?'var(--bad)':'inherit'}">${v.schedulable}</b></td></tr>`).join('');
+}
+async function loadReports(){
+  const rs = await getJSON('/api/reports');
+  document.getElementById('reports').innerHTML = rs.map(r=>`<div class="card" style="margin-bottom:10px">
+    <h3>报告 ${r.report} · 委托 ${r.order} · 签发 ${r.issued} · ${pill(r.validity==='valid'?'valid':(r.validity==='partially_invalid'?'awaiting_instrument':'need_supplement'))}
+      <span class="muted">效力=${r.validity}；原报告与引用读数保留可查</span></h3>
+    <table><thead><tr><th>引用试验</th><th>方法</th><th>读数时刻</th><th>效力</th><th>重测进度</th></tr></thead><tbody>
+    ${r.items.map(i=>`<tr><td><code>${i.attempt}</code></td><td>${i.method||''}</td><td>${i.evidence_at||''}</td>
+      <td>${i.valid?'有效':`被 ${i.invalidated_by} 判失效`}</td>
+      <td>${(i.retests||[]).map(t=>`<code>${t.attempt}</code> ${t.valid?'有效读数':'失效'} ${t.cited_by_reports.length?'已被 '+t.cited_by_reports.join(',')+' 引用':'尚未被新报告引用'}`).join('；')||'—'}</td></tr>`).join('')}
+    </tbody></table>
+    ${r.actions.map(a=>`<p style="margin:8px 0 0">${pill(a.bucket)} <b>${a.label}</b> <span class="muted">项目 ${a.method} / 原试验 ${a.for_attempt}</span></p>`).join('')}
+  </div>`).join('');
+}
+document.getElementById('refresh').onclick = loadBoard;
+document.getElementById('at').onchange = loadBoard;
+loadBoard(); loadCal(); loadQty(); loadReports();
+</script>
+</body>
+</html>

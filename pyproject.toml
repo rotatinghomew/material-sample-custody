@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "labdesk"
+version = "1.0.0"
+description = "共用实验室送检、样品占用与复测承诺引擎（Python 3.11 标准库）"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+labdesk = "labdesk.cli:main"
+
+[tool.setuptools]
+packages = ["labdesk"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

@@ -1,0 +1,1248 @@
+{
+  "meta": {
+    "exercise_date": "2026-12-08",
+    "timezone": "UTC+08:00",
+    "source_file": "/workspace/data/samples_20261208.json",
+    "source_sha256": "305219f1ebea811dd89311c966b6bb36263f50cbcde7949015df46e33f8164ba",
+    "cuts": [
+      "11:05",
+      "14:05",
+      "14:20",
+      "16:00",
+      "17:10",
+      "eod"
+    ]
+  },
+  "headline": {
+    "calibration_K1_hits": [
+      "T1"
+    ],
+    "calibration_K1_orders": [
+      "O11"
+    ],
+    "calibration_K1_reports": [
+      "R1"
+    ],
+    "calibration_K2_hits": [],
+    "truly_affected_orders": [
+      "O11"
+    ],
+    "shared_sample_O11_O12": "A3",
+    "open_custody": [
+      "Q3"
+    ],
+    "retention_assignment": [
+      {
+        "order": "O11",
+        "retained_units": 1,
+        "assignment": {
+          "A2": 1
+        },
+        "status": "schedulable"
+      },
+      {
+        "order": "O12",
+        "retained_units": 1,
+        "assignment": {
+          "A4": 1
+        },
+        "status": "schedulable"
+      },
+      {
+        "order": "O13",
+        "retained_units": 0,
+        "assignment": {},
+        "status": "schedulable"
+      }
+    ]
+  },
+  "lot_physical_units": {
+    "B51": 6,
+    "B52": 4
+  },
+  "quantities": {
+    "A1": {
+      "id": "A1",
+      "lot": "B51",
+      "parent": null,
+      "form": "plaque",
+      "supplier": "Vendor-A",
+      "received": 6,
+      "child_units": 6,
+      "base_units": 0,
+      "consumed": 0,
+      "unconfirmed": 0,
+      "in_instrument": 0,
+      "reserved": 0,
+      "book_available": 0,
+      "schedulable": 0,
+      "overcommitted": false,
+      "open_attempts": [],
+      "serial_states": {}
+    },
+    "A2": {
+      "id": "A2",
+      "lot": "B51",
+      "parent": "A1",
+      "form": "plaque",
+      "supplier": "Vendor-A",
+      "received": 2,
+      "child_units": 0,
+      "base_units": 2,
+      "consumed": 1,
+      "unconfirmed": 0,
+      "in_instrument": 0,
+      "reserved": 0,
+      "book_available": 1,
+      "schedulable": 1,
+      "overcommitted": false,
+      "open_attempts": [],
+      "serial_states": {
+        "A2#1": "used_returned",
+        "A2#2": "consumed"
+      }
+    },
+    "A3": {
+      "id": "A3",
+      "lot": "B51",
+      "parent": "A1",
+      "form": "plaque",
+      "supplier": "Vendor-A",
+      "received": 2,
+      "child_units": 0,
+      "base_units": 2,
+      "consumed": 1,
+      "unconfirmed": 0,
+      "in_instrument": 0,
+      "reserved": 0,
+      "book_available": 1,
+      "schedulable": 1,
+      "overcommitted": false,
+      "open_attempts": [],
+      "serial_states": {
+        "A3#1": "consumed"
+      }
+    },
+    "A4": {
+      "id": "A4",
+      "lot": "B51",
+      "parent": "A1",
+      "form": "plaque",
+      "supplier": "Vendor-A",
+      "received": 2,
+      "child_units": 0,
+      "base_units": 2,
+      "consumed": 1,
+      "unconfirmed": 0,
+      "in_instrument": 0,
+      "reserved": 0,
+      "book_available": 1,
+      "schedulable": 1,
+      "overcommitted": false,
+      "open_attempts": [
+        "T3"
+      ],
+      "serial_states": {
+        "A4#1": "consumed"
+      }
+    },
+    "B2": {
+      "id": "B2",
+      "lot": "B52",
+      "parent": null,
+      "form": "pellet",
+      "supplier": "Vendor-B",
+      "received": 4,
+      "child_units": 0,
+      "base_units": 4,
+      "consumed": 0,
+      "unconfirmed": 0,
+      "in_instrument": 0,
+      "reserved": 0,
+      "book_available": 4,
+      "schedulable": 4,
+      "overcommitted": false,
+      "open_attempts": [],
+      "serial_states": {
+        "B2#1": "used_returned"
+      }
+    }
+  },
+  "traceability": {
+    "A1": {
+      "sample": "A1",
+      "lot": "B51",
+      "supplier": "Vendor-A",
+      "ancestry": [
+        {
+          "id": "A1",
+          "parent": null,
+          "lot": "B51",
+          "supplier": "Vendor-A",
+          "units": 6,
+          "form": "plaque"
+        }
+      ]
+    },
+    "A2": {
+      "sample": "A2",
+      "lot": "B51",
+      "supplier": "Vendor-A",
+      "ancestry": [
+        {
+          "id": "A2",
+          "parent": "A1",
+          "lot": "B51",
+          "supplier": "Vendor-A",
+          "units": 2,
+          "form": "plaque"
+        },
+        {
+          "id": "A1",
+          "parent": null,
+          "lot": "B51",
+          "supplier": "Vendor-A",
+          "units": 6,
+          "form": "plaque"
+        }
+      ]
+    },
+    "A3": {
+      "sample": "A3",
+      "lot": "B51",
+      "supplier": "Vendor-A",
+      "ancestry": [
+        {
+          "id": "A3",
+          "parent": "A1",
+          "lot": "B51",
+          "supplier": "Vendor-A",
+          "units": 2,
+          "form": "plaque"
+        },
+        {
+          "id": "A1",
+          "parent": null,
+          "lot": "B51",
+          "supplier": "Vendor-A",
+          "units": 6,
+          "form": "plaque"
+        }
+      ]
+    },
+    "A4": {
+      "sample": "A4",
+      "lot": "B51",
+      "supplier": "Vendor-A",
+      "ancestry": [
+        {
+          "id": "A4",
+          "parent": "A1",
+          "lot": "B51",
+          "supplier": "Vendor-A",
+          "units": 2,
+          "form": "plaque"
+        },
+        {
+          "id": "A1",
+          "parent": null,
+          "lot": "B51",
+          "supplier": "Vendor-A",
+          "units": 6,
+          "form": "plaque"
+        }
+      ]
+    },
+    "B2": {
+      "sample": "B2",
+      "lot": "B52",
+      "supplier": "Vendor-B",
+      "ancestry": [
+        {
+          "id": "B2",
+          "parent": null,
+          "lot": "B52",
+          "supplier": "Vendor-B",
+          "units": 4,
+          "form": "pellet"
+        }
+      ]
+    }
+  },
+  "calibration_impacts": [
+    {
+      "calibration": "K1",
+      "instrument": "I1",
+      "window": [
+        "09:25",
+        "10:15"
+      ],
+      "recorded": "14:00",
+      "methods": [
+        "bend"
+      ],
+      "affected_attempts": [
+        "T1"
+      ],
+      "affected_orders": [
+        "O11"
+      ],
+      "affected_reports": [
+        "R1"
+      ],
+      "hit_count": 1
+    },
+    {
+      "calibration": "K2",
+      "instrument": "I3",
+      "window": [
+        "10:00",
+        "10:30"
+      ],
+      "recorded": "14:15",
+      "methods": [
+        "scan"
+      ],
+      "affected_attempts": [],
+      "affected_orders": [],
+      "affected_reports": [],
+      "hit_count": 0
+    }
+  ],
+  "acceptance_preview": {
+    "O11": {
+      "order": "O11",
+      "at": "08:30",
+      "needed_by": "17:00",
+      "allowed_samples": [
+        "A2",
+        "A3"
+      ],
+      "material": {
+        "methods": [
+          {
+            "method": "bend",
+            "consumes": true,
+            "units": 1
+          },
+          {
+            "method": "scan",
+            "consumes": false,
+            "units": 1
+          }
+        ],
+        "consumptive_units": 1,
+        "retained_units": 1,
+        "temporary_peak_units": 1,
+        "terminal_units": 2,
+        "required_units": 2
+      },
+      "planning_need_units": 2,
+      "allocation": {
+        "A2": 2
+      },
+      "available_in_allowed": {
+        "A2": 2,
+        "A3": 2
+      },
+      "supplement_units": 0,
+      "blockers": [],
+      "windows": {
+        "bend": [
+          {
+            "instrument": "I1",
+            "qualification": "C1",
+            "begin": "08:00",
+            "end": "14:00",
+            "deadline": "17:00",
+            "earliest_start": "08:30",
+            "latest_start": "14:00",
+            "feasible": true,
+            "reason": null
+          },
+          {
+            "instrument": "I2",
+            "qualification": "C2",
+            "begin": "08:00",
+            "end": "18:00",
+            "deadline": "17:00",
+            "earliest_start": "08:30",
+            "latest_start": "17:00",
+            "feasible": true,
+            "reason": null
+          }
+        ],
+        "scan": [
+          {
+            "instrument": "I3",
+            "qualification": "C3",
+            "begin": "07:00",
+            "end": "18:00",
+            "deadline": "17:00",
+            "earliest_start": "08:30",
+            "latest_start": "17:00",
+            "feasible": true,
+            "reason": null
+          }
+        ]
+      },
+      "status": "schedulable",
+      "label": "可以安排"
+    },
+    "O12": {
+      "order": "O12",
+      "at": "08:30",
+      "needed_by": "18:00",
+      "allowed_samples": [
+        "A3",
+        "A4"
+      ],
+      "material": {
+        "methods": [
+          {
+            "method": "bend",
+            "consumes": true,
+            "units": 1
+          }
+        ],
+        "consumptive_units": 1,
+        "retained_units": 1,
+        "temporary_peak_units": 0,
+        "terminal_units": 2,
+        "required_units": 2
+      },
+      "planning_need_units": 2,
+      "allocation": {
+        "A4": 2
+      },
+      "available_in_allowed": {
+        "A3": 2,
+        "A4": 2
+      },
+      "supplement_units": 0,
+      "blockers": [],
+      "windows": {
+        "bend": [
+          {
+            "instrument": "I1",
+            "qualification": "C1",
+            "begin": "08:00",
+            "end": "14:00",
+            "deadline": "18:00",
+            "earliest_start": "08:30",
+            "latest_start": "14:00",
+            "feasible": true,
+            "reason": null
+          },
+          {
+            "instrument": "I2",
+            "qualification": "C2",
+            "begin": "08:00",
+            "end": "18:00",
+            "deadline": "18:00",
+            "earliest_start": "08:30",
+            "latest_start": "18:00",
+            "feasible": true,
+            "reason": null
+          }
+        ]
+      },
+      "status": "schedulable",
+      "label": "可以安排"
+    },
+    "O13": {
+      "order": "O13",
+      "at": "08:30",
+      "needed_by": "16:00",
+      "allowed_samples": [
+        "B2"
+      ],
+      "material": {
+        "methods": [
+          {
+            "method": "scan",
+            "consumes": false,
+            "units": 1
+          }
+        ],
+        "consumptive_units": 0,
+        "retained_units": 0,
+        "temporary_peak_units": 1,
+        "terminal_units": 0,
+        "required_units": 1
+      },
+      "planning_need_units": 1,
+      "allocation": {
+        "B2": 1
+      },
+      "available_in_allowed": {
+        "B2": 4
+      },
+      "supplement_units": 0,
+      "blockers": [],
+      "windows": {
+        "scan": [
+          {
+            "instrument": "I3",
+            "qualification": "C3",
+            "begin": "07:00",
+            "end": "18:00",
+            "deadline": "16:00",
+            "earliest_start": "08:30",
+            "latest_start": "16:00",
+            "feasible": true,
+            "reason": null
+          }
+        ]
+      },
+      "status": "schedulable",
+      "label": "可以安排"
+    }
+  },
+  "atomic_acceptance_demo": [
+    {
+      "order": "O11",
+      "accepted": true,
+      "reservations": [
+        "RET-O11-A2"
+      ]
+    },
+    {
+      "order": "O12",
+      "accepted": true,
+      "reservations": [
+        "RET-O12-A4"
+      ]
+    },
+    {
+      "order": "O13",
+      "accepted": true,
+      "reservations": []
+    }
+  ],
+  "reports_eod": {
+    "R1": {
+      "report": "R1",
+      "order": "O11",
+      "issued": "11:00",
+      "at": null,
+      "validity": "partially_invalid",
+      "original_report_preserved": true,
+      "cited_attempts": [
+        "T1",
+        "T2"
+      ],
+      "items": [
+        {
+          "attempt": "T1",
+          "method": "bend",
+          "sample": "A2",
+          "instrument": "I1",
+          "evidence_at": "09:30",
+          "valid": false,
+          "invalidated_by": "K1",
+          "retests": [
+            {
+              "attempt": "T4",
+              "sample": "A3",
+              "instrument": "I2",
+              "evidence_at": "15:46",
+              "valid": true,
+              "invalidated_by": null,
+              "cited_by_reports": [],
+              "has_evidence": true
+            }
+          ],
+          "retest_closed_by_report": false,
+          "still_usable": false,
+          "applicability": {
+            "applicable": true,
+            "sample_allowed": true,
+            "instrument_registered": true,
+            "method_matches": true,
+            "qualified_code": "C1",
+            "within_qualification_window": true
+          }
+        },
+        {
+          "attempt": "T2",
+          "method": "scan",
+          "sample": "A2",
+          "instrument": "I3",
+          "evidence_at": "09:15",
+          "valid": true,
+          "invalidated_by": null,
+          "retests": [],
+          "retest_closed_by_report": false,
+          "still_usable": true,
+          "applicability": {
+            "applicable": true,
+            "sample_allowed": true,
+            "instrument_registered": true,
+            "method_matches": true,
+            "qualified_code": "C3",
+            "within_qualification_window": true
+          }
+        }
+      ],
+      "actions": [
+        {
+          "bucket": "retest_done_pending_report",
+          "label": "重测读数已完成，待换发/补引报告",
+          "retests": [
+            {
+              "attempt": "T4",
+              "sample": "A3",
+              "instrument": "I2",
+              "evidence_at": "15:46",
+              "valid": true,
+              "invalidated_by": null,
+              "cited_by_reports": [],
+              "has_evidence": true
+            }
+          ],
+          "for_attempt": "T1",
+          "method": "bend"
+        }
+      ]
+    },
+    "R2": {
+      "report": "R2",
+      "order": "O13",
+      "issued": "12:00",
+      "at": null,
+      "validity": "valid",
+      "original_report_preserved": true,
+      "cited_attempts": [
+        "T5"
+      ],
+      "items": [
+        {
+          "attempt": "T5",
+          "method": "scan",
+          "sample": "B2",
+          "instrument": "I3",
+          "evidence_at": "10:45",
+          "valid": true,
+          "invalidated_by": null,
+          "retests": [],
+          "retest_closed_by_report": false,
+          "still_usable": true,
+          "applicability": {
+            "applicable": true,
+            "sample_allowed": true,
+            "instrument_registered": true,
+            "method_matches": true,
+            "qualified_code": "C3",
+            "within_qualification_window": true
+          }
+        }
+      ],
+      "actions": []
+    }
+  },
+  "order_timeline": {
+    "11:05": [
+      {
+        "order": "O11",
+        "customer": "Buyer-1",
+        "needed_by": "17:00",
+        "at": "11:05",
+        "sender_state": "valid",
+        "sender_label": "报告当前有效",
+        "detail": null,
+        "reports": [
+          {
+            "report": "R1",
+            "validity": "valid",
+            "actions": []
+          }
+        ],
+        "inflight": [],
+        "physical_return_exceptions": [],
+        "methods_without_original_report": []
+      },
+      {
+        "order": "O12",
+        "customer": "Buyer-2",
+        "needed_by": "18:00",
+        "at": "11:05",
+        "sender_state": "awaiting_instrument",
+        "sender_label": "在等仪器回报",
+        "detail": {
+          "inflight": [
+            {
+              "attempt": "T3",
+              "method": "bend",
+              "waiting_data": true,
+              "data_arrived": false,
+              "has_evidence": true,
+              "open_custody": true,
+              "physical_pending": false,
+              "custody_ids": [
+                "Q3"
+              ]
+            }
+          ]
+        },
+        "reports": [],
+        "inflight": [
+          {
+            "attempt": "T3",
+            "method": "bend",
+            "waiting_data": true,
+            "data_arrived": false,
+            "has_evidence": true,
+            "open_custody": true,
+            "physical_pending": false,
+            "custody_ids": [
+              "Q3"
+            ]
+          }
+        ],
+        "physical_return_exceptions": [
+          {
+            "attempt": "T3",
+            "method": "bend",
+            "waiting_data": true,
+            "data_arrived": false,
+            "has_evidence": true,
+            "open_custody": true,
+            "physical_pending": false,
+            "custody_ids": [
+              "Q3"
+            ]
+          }
+        ],
+        "methods_without_original_report": [
+          "bend"
+        ]
+      },
+      {
+        "order": "O13",
+        "customer": "Buyer-3",
+        "needed_by": "16:00",
+        "at": "11:05",
+        "sender_state": "ready_to_issue_report",
+        "sender_label": "读数与回执已齐，待签发报告",
+        "detail": {
+          "methods_awaiting_report": [
+            "scan"
+          ]
+        },
+        "reports": [],
+        "inflight": [],
+        "physical_return_exceptions": [],
+        "methods_without_original_report": [
+          "scan"
+        ]
+      }
+    ],
+    "14:05": [
+      {
+        "order": "O11",
+        "customer": "Buyer-1",
+        "needed_by": "17:00",
+        "at": "14:05",
+        "sender_state": "schedulable",
+        "sender_label": "可以安排复测/试验",
+        "detail": null,
+        "reports": [
+          {
+            "report": "R1",
+            "validity": "partially_invalid",
+            "actions": [
+              {
+                "method": "bend",
+                "bucket": "schedulable",
+                "label": "可以安排"
+              }
+            ]
+          }
+        ],
+        "inflight": [],
+        "physical_return_exceptions": [],
+        "methods_without_original_report": []
+      },
+      {
+        "order": "O12",
+        "customer": "Buyer-2",
+        "needed_by": "18:00",
+        "at": "14:05",
+        "sender_state": "awaiting_instrument",
+        "sender_label": "在等仪器回报",
+        "detail": {
+          "inflight": [
+            {
+              "attempt": "T3",
+              "method": "bend",
+              "waiting_data": true,
+              "data_arrived": false,
+              "has_evidence": true,
+              "open_custody": true,
+              "physical_pending": false,
+              "custody_ids": [
+                "Q3"
+              ]
+            }
+          ]
+        },
+        "reports": [],
+        "inflight": [
+          {
+            "attempt": "T3",
+            "method": "bend",
+            "waiting_data": true,
+            "data_arrived": false,
+            "has_evidence": true,
+            "open_custody": true,
+            "physical_pending": false,
+            "custody_ids": [
+              "Q3"
+            ]
+          }
+        ],
+        "physical_return_exceptions": [
+          {
+            "attempt": "T3",
+            "method": "bend",
+            "waiting_data": true,
+            "data_arrived": false,
+            "has_evidence": true,
+            "open_custody": true,
+            "physical_pending": false,
+            "custody_ids": [
+              "Q3"
+            ]
+          }
+        ],
+        "methods_without_original_report": [
+          "bend"
+        ]
+      },
+      {
+        "order": "O13",
+        "customer": "Buyer-3",
+        "needed_by": "16:00",
+        "at": "14:05",
+        "sender_state": "valid",
+        "sender_label": "报告当前有效",
+        "detail": null,
+        "reports": [
+          {
+            "report": "R2",
+            "validity": "valid",
+            "actions": []
+          }
+        ],
+        "inflight": [],
+        "physical_return_exceptions": [],
+        "methods_without_original_report": []
+      }
+    ],
+    "14:20": [
+      {
+        "order": "O11",
+        "customer": "Buyer-1",
+        "needed_by": "17:00",
+        "at": "14:20",
+        "sender_state": "schedulable",
+        "sender_label": "可以安排复测/试验",
+        "detail": null,
+        "reports": [
+          {
+            "report": "R1",
+            "validity": "partially_invalid",
+            "actions": [
+              {
+                "method": "bend",
+                "bucket": "schedulable",
+                "label": "可以安排"
+              }
+            ]
+          }
+        ],
+        "inflight": [],
+        "physical_return_exceptions": [],
+        "methods_without_original_report": []
+      },
+      {
+        "order": "O12",
+        "customer": "Buyer-2",
+        "needed_by": "18:00",
+        "at": "14:20",
+        "sender_state": "awaiting_instrument",
+        "sender_label": "在等仪器回报",
+        "detail": {
+          "inflight": [
+            {
+              "attempt": "T3",
+              "method": "bend",
+              "waiting_data": true,
+              "data_arrived": false,
+              "has_evidence": true,
+              "open_custody": true,
+              "physical_pending": false,
+              "custody_ids": [
+                "Q3"
+              ]
+            }
+          ]
+        },
+        "reports": [],
+        "inflight": [
+          {
+            "attempt": "T3",
+            "method": "bend",
+            "waiting_data": true,
+            "data_arrived": false,
+            "has_evidence": true,
+            "open_custody": true,
+            "physical_pending": false,
+            "custody_ids": [
+              "Q3"
+            ]
+          }
+        ],
+        "physical_return_exceptions": [
+          {
+            "attempt": "T3",
+            "method": "bend",
+            "waiting_data": true,
+            "data_arrived": false,
+            "has_evidence": true,
+            "open_custody": true,
+            "physical_pending": false,
+            "custody_ids": [
+              "Q3"
+            ]
+          }
+        ],
+        "methods_without_original_report": [
+          "bend"
+        ]
+      },
+      {
+        "order": "O13",
+        "customer": "Buyer-3",
+        "needed_by": "16:00",
+        "at": "14:20",
+        "sender_state": "valid",
+        "sender_label": "报告当前有效",
+        "detail": null,
+        "reports": [
+          {
+            "report": "R2",
+            "validity": "valid",
+            "actions": []
+          }
+        ],
+        "inflight": [],
+        "physical_return_exceptions": [],
+        "methods_without_original_report": []
+      }
+    ],
+    "16:00": [
+      {
+        "order": "O11",
+        "customer": "Buyer-1",
+        "needed_by": "17:00",
+        "at": "16:00",
+        "sender_state": "retest_done_pending_report",
+        "sender_label": "复测已完成，待换发报告",
+        "detail": null,
+        "reports": [
+          {
+            "report": "R1",
+            "validity": "partially_invalid",
+            "actions": [
+              {
+                "method": "bend",
+                "bucket": "retest_done_pending_report",
+                "label": "重测读数已完成，待换发/补引报告"
+              }
+            ]
+          }
+        ],
+        "inflight": [],
+        "physical_return_exceptions": [],
+        "methods_without_original_report": []
+      },
+      {
+        "order": "O12",
+        "customer": "Buyer-2",
+        "needed_by": "18:00",
+        "at": "16:00",
+        "sender_state": "awaiting_instrument",
+        "sender_label": "在等仪器回报",
+        "detail": {
+          "inflight": [
+            {
+              "attempt": "T3",
+              "method": "bend",
+              "waiting_data": true,
+              "data_arrived": false,
+              "has_evidence": true,
+              "open_custody": true,
+              "physical_pending": false,
+              "custody_ids": [
+                "Q3"
+              ]
+            }
+          ]
+        },
+        "reports": [],
+        "inflight": [
+          {
+            "attempt": "T3",
+            "method": "bend",
+            "waiting_data": true,
+            "data_arrived": false,
+            "has_evidence": true,
+            "open_custody": true,
+            "physical_pending": false,
+            "custody_ids": [
+              "Q3"
+            ]
+          }
+        ],
+        "physical_return_exceptions": [
+          {
+            "attempt": "T3",
+            "method": "bend",
+            "waiting_data": true,
+            "data_arrived": false,
+            "has_evidence": true,
+            "open_custody": true,
+            "physical_pending": false,
+            "custody_ids": [
+              "Q3"
+            ]
+          }
+        ],
+        "methods_without_original_report": [
+          "bend"
+        ]
+      },
+      {
+        "order": "O13",
+        "customer": "Buyer-3",
+        "needed_by": "16:00",
+        "at": "16:00",
+        "sender_state": "valid",
+        "sender_label": "报告当前有效",
+        "detail": null,
+        "reports": [
+          {
+            "report": "R2",
+            "validity": "valid",
+            "actions": []
+          }
+        ],
+        "inflight": [],
+        "physical_return_exceptions": [],
+        "methods_without_original_report": []
+      }
+    ],
+    "17:10": [
+      {
+        "order": "O11",
+        "customer": "Buyer-1",
+        "needed_by": "17:00",
+        "at": "17:10",
+        "sender_state": "retest_done_pending_report",
+        "sender_label": "复测已完成，待换发报告",
+        "detail": null,
+        "reports": [
+          {
+            "report": "R1",
+            "validity": "partially_invalid",
+            "actions": [
+              {
+                "method": "bend",
+                "bucket": "retest_done_pending_report",
+                "label": "重测读数已完成，待换发/补引报告"
+              }
+            ]
+          }
+        ],
+        "inflight": [],
+        "physical_return_exceptions": [],
+        "methods_without_original_report": []
+      },
+      {
+        "order": "O12",
+        "customer": "Buyer-2",
+        "needed_by": "18:00",
+        "at": "17:10",
+        "sender_state": "ready_to_issue_report",
+        "sender_label": "读数与回执已齐，待签发报告",
+        "detail": {
+          "methods_awaiting_report": [
+            "bend"
+          ]
+        },
+        "reports": [],
+        "inflight": [],
+        "physical_return_exceptions": [
+          {
+            "attempt": "T3",
+            "method": "bend",
+            "waiting_data": false,
+            "data_arrived": true,
+            "has_evidence": true,
+            "open_custody": true,
+            "physical_pending": false,
+            "custody_ids": [
+              "Q3"
+            ]
+          }
+        ],
+        "methods_without_original_report": [
+          "bend"
+        ]
+      },
+      {
+        "order": "O13",
+        "customer": "Buyer-3",
+        "needed_by": "16:00",
+        "at": "17:10",
+        "sender_state": "valid",
+        "sender_label": "报告当前有效",
+        "detail": null,
+        "reports": [
+          {
+            "report": "R2",
+            "validity": "valid",
+            "actions": []
+          }
+        ],
+        "inflight": [],
+        "physical_return_exceptions": [],
+        "methods_without_original_report": []
+      }
+    ],
+    "eod": [
+      {
+        "order": "O11",
+        "customer": "Buyer-1",
+        "needed_by": "17:00",
+        "at": null,
+        "sender_state": "retest_done_pending_report",
+        "sender_label": "复测已完成，待换发报告",
+        "detail": null,
+        "reports": [
+          {
+            "report": "R1",
+            "validity": "partially_invalid",
+            "actions": [
+              {
+                "method": "bend",
+                "bucket": "retest_done_pending_report",
+                "label": "重测读数已完成，待换发/补引报告"
+              }
+            ]
+          }
+        ],
+        "inflight": [],
+        "physical_return_exceptions": [],
+        "methods_without_original_report": []
+      },
+      {
+        "order": "O12",
+        "customer": "Buyer-2",
+        "needed_by": "18:00",
+        "at": null,
+        "sender_state": "ready_to_issue_report",
+        "sender_label": "读数与回执已齐，待签发报告",
+        "detail": {
+          "methods_awaiting_report": [
+            "bend"
+          ]
+        },
+        "reports": [],
+        "inflight": [],
+        "physical_return_exceptions": [
+          {
+            "attempt": "T3",
+            "method": "bend",
+            "waiting_data": false,
+            "data_arrived": true,
+            "has_evidence": true,
+            "open_custody": true,
+            "physical_pending": false,
+            "custody_ids": [
+              "Q3"
+            ]
+          }
+        ],
+        "methods_without_original_report": [
+          "bend"
+        ]
+      },
+      {
+        "order": "O13",
+        "customer": "Buyer-3",
+        "needed_by": "16:00",
+        "at": null,
+        "sender_state": "valid",
+        "sender_label": "报告当前有效",
+        "detail": null,
+        "reports": [
+          {
+            "report": "R2",
+            "validity": "valid",
+            "actions": []
+          }
+        ],
+        "inflight": [],
+        "physical_return_exceptions": [],
+        "methods_without_original_report": []
+      }
+    ]
+  },
+  "triage_boards": {
+    "11:05": {
+      "schedulable": [],
+      "need_supplement": [],
+      "awaiting_instrument": [
+        "O12"
+      ]
+    },
+    "14:05": {
+      "schedulable": [
+        "O11"
+      ],
+      "need_supplement": [],
+      "awaiting_instrument": [
+        "O12"
+      ]
+    },
+    "14:20": {
+      "schedulable": [
+        "O11"
+      ],
+      "need_supplement": [],
+      "awaiting_instrument": [
+        "O12"
+      ]
+    },
+    "16:00": {
+      "schedulable": [],
+      "need_supplement": [],
+      "awaiting_instrument": [
+        "O12"
+      ]
+    },
+    "17:10": {
+      "schedulable": [],
+      "need_supplement": [],
+      "awaiting_instrument": []
+    },
+    "eod": {
+      "schedulable": [],
+      "need_supplement": [],
+      "awaiting_instrument": []
+    }
+  }
+}
